@@ -1,12 +1,20 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect, useRef } from "react"
-import { Search, BookOpen, Code2, Calculator, Cpu, Zap, Database } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent } from "@/components/ui/card"
-import { useRouter } from "next/navigation"
+import { useState, useEffect, useRef } from "react";
+import {
+  Search,
+  BookOpen,
+  Code2,
+  Calculator,
+  Cpu,
+  Zap,
+  Database,
+} from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { useRouter } from "next/navigation";
 
 // Comprehensive subjects database with proper routing
 const SUBJECTS_DATABASE = [
@@ -227,19 +235,27 @@ const SUBJECTS_DATABASE = [
     semester: "1st-sem",
     icon: Calculator,
   },
-]
+  {
+    code: "math102",
+    name: "Transportation Engineering",
+    department: "civil",
+    year: "4th-year",
+    semester: "1st-sem",
+    icon: Calculator,
+  },
+];
 
 interface SubjectSearchProps {
-  className?: string
+  className?: string;
 }
 
 export function SubjectSearch({ className = "" }: SubjectSearchProps) {
-  const [query, setQuery] = useState("")
-  const [suggestions, setSuggestions] = useState<typeof SUBJECTS_DATABASE>([])
-  const [isOpen, setIsOpen] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState(-1)
-  const searchRef = useRef<HTMLDivElement>(null)
-  const router = useRouter()
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState<typeof SUBJECTS_DATABASE>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   // Filter subjects based on query
   useEffect(() => {
@@ -247,63 +263,70 @@ export function SubjectSearch({ className = "" }: SubjectSearchProps) {
       const filtered = SUBJECTS_DATABASE.filter(
         (subject) =>
           subject.code.toLowerCase().includes(query.toLowerCase()) ||
-          subject.name.toLowerCase().includes(query.toLowerCase()),
-      ).slice(0, 8) // Limit to 8 suggestions
+          subject.name.toLowerCase().includes(query.toLowerCase())
+      ).slice(0, 8); // Limit to 8 suggestions
 
-      setSuggestions(filtered)
-      setIsOpen(filtered.length > 0)
-      setSelectedIndex(-1)
+      setSuggestions(filtered);
+      setIsOpen(filtered.length > 0);
+      setSelectedIndex(-1);
     } else {
-      setSuggestions([])
-      setIsOpen(false)
+      setSuggestions([]);
+      setIsOpen(false);
     }
-  }, [query])
+  }, [query]);
 
   // Handle click outside to close suggestions
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setIsOpen(false)
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [])
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Handle keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (!isOpen) return
+    if (!isOpen) return;
 
     switch (e.key) {
       case "ArrowDown":
-        e.preventDefault()
-        setSelectedIndex((prev) => (prev < suggestions.length - 1 ? prev + 1 : prev))
-        break
+        e.preventDefault();
+        setSelectedIndex((prev) =>
+          prev < suggestions.length - 1 ? prev + 1 : prev
+        );
+        break;
       case "ArrowUp":
-        e.preventDefault()
-        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev))
-        break
+        e.preventDefault();
+        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev));
+        break;
       case "Enter":
-        e.preventDefault()
+        e.preventDefault();
         if (selectedIndex >= 0 && suggestions[selectedIndex]) {
-          handleSubjectClick(suggestions[selectedIndex])
+          handleSubjectClick(suggestions[selectedIndex]);
         }
-        break
+        break;
       case "Escape":
-        setIsOpen(false)
-        setSelectedIndex(-1)
-        break
+        setIsOpen(false);
+        setSelectedIndex(-1);
+        break;
     }
-  }
+  };
 
   // Navigate to subject page
   const handleSubjectClick = (subject: (typeof SUBJECTS_DATABASE)[0]) => {
-    const route = `/dept/${subject.department}/${subject.year}/${subject.semester}/${subject.code.toLowerCase()}`
-    router.push(route)
-    setQuery("")
-    setIsOpen(false)
-  }
+    const route = `/dept/${subject.department}/${subject.year}/${
+      subject.semester
+    }/${subject.code.toLowerCase()}`;
+    router.push(route);
+    setQuery("");
+    setIsOpen(false);
+  };
 
   return (
     <div ref={searchRef} className={`relative w-full max-w-2xl ${className}`}>
@@ -326,47 +349,72 @@ export function SubjectSearch({ className = "" }: SubjectSearchProps) {
           <CardContent className="p-0">
             <div className="max-h-96 overflow-y-auto">
               {suggestions.map((subject, index) => {
-                const IconComponent = subject.icon
+                const IconComponent = subject.icon;
                 return (
                   <div
                     key={`${subject.code}-${subject.department}`}
                     onClick={() => handleSubjectClick(subject)}
                     className={`flex items-center gap-4 p-4 cursor-pointer transition-all duration-200 border-b border-gray-50 last:border-b-0 ${
-                      index === selectedIndex ? "bg-blue-50 border-l-4 border-l-blue-500" : "hover:bg-gray-50"
+                      index === selectedIndex
+                        ? "bg-blue-50 border-l-4 border-l-blue-500"
+                        : "hover:bg-gray-50"
                     }`}
                   >
                     {/* Subject Icon */}
-                    <div className={`p-2 rounded-lg ${index === selectedIndex ? "bg-blue-100" : "bg-gray-100"}`}>
+                    <div
+                      className={`p-2 rounded-lg ${
+                        index === selectedIndex ? "bg-blue-100" : "bg-gray-100"
+                      }`}
+                    >
                       <IconComponent
-                        className={`h-5 w-5 ${index === selectedIndex ? "text-blue-600" : "text-gray-600"}`}
+                        className={`h-5 w-5 ${
+                          index === selectedIndex
+                            ? "text-blue-600"
+                            : "text-gray-600"
+                        }`}
                       />
                     </div>
 
                     {/* Subject Info */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="font-bold text-blue-600 text-sm">{subject.code}</span>
+                        <span className="font-bold text-blue-600 text-sm">
+                          {subject.code}
+                        </span>
                         <span className="text-gray-400">•</span>
-                        <span className="font-semibold text-gray-800 truncate">{subject.name}</span>
+                        <span className="font-semibold text-gray-800 truncate">
+                          {subject.name}
+                        </span>
                       </div>
                       <div className="text-xs text-gray-500 capitalize">
-                        {subject.department.replace("-", " ")} • {subject.year} • {subject.semester.replace("-", " ")}
+                        {subject.department.replace("-", " ")} • {subject.year}{" "}
+                        • {subject.semester.replace("-", " ")}
                       </div>
                     </div>
 
                     {/* Arrow */}
                     <div className="text-gray-400">
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
                       </svg>
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
           </CardContent>
         </Card>
       )}
     </div>
-  )
+  );
 }

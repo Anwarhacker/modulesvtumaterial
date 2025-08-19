@@ -1,52 +1,52 @@
-"use client"
+"use client";
 
-import { useAuth } from "@/hooks/use-auth"
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useAuth } from "@/hooks/use-auth";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
+} from "@/components/ui/dropdown-menu";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function Navbar() {
-  const { user, signOut, isSigningIn } = useAuth()
-  const router = useRouter()
-  const [isOpen, setIsOpen] = useState(false)
+  const { user, signOut, isSigningIn } = useAuth();
+  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleNavigation = (path: string) => {
-    router.push(path)
-    setIsOpen(false)
-  }
+    router.push(path);
+    setIsOpen(false);
+  };
 
   const handleStudentCornerClick = () => {
     if (user) {
-      handleNavigation("/student-corner")
+      handleNavigation("/student-corner");
     } else {
-      handleNavigation("/login")
+      handleNavigation("/login");
     }
-  }
+  };
 
   const handleLogout = async () => {
     try {
-      await signOut()
-      router.push("/")
+      await signOut();
+      router.push("/");
     } catch (error) {
-      console.error("Failed to logout:", error)
+      console.error("Failed to logout:", error);
     }
-  }
+  };
 
   const navLinks = [
     { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
     { name: "Notes", path: "/notes" },
     { name: "Syllabus", path: "/syllabus" },
-    { name: "Projects", path: "/projects" },
     { name: "Project Ideas", path: "/project-ideas" },
-  ]
+  ];
 
   return (
     <nav className="relative bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
@@ -97,7 +97,9 @@ export function Navbar() {
                         className="object-cover transition-transform duration-300 hover:scale-105"
                       />
                       <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold text-xs sm:text-sm">
-                        {user.displayName?.charAt(0)?.toUpperCase() || user.email?.charAt(0)?.toUpperCase() || "U"}
+                        {user.displayName?.charAt(0)?.toUpperCase() ||
+                          user.email?.charAt(0)?.toUpperCase() ||
+                          "U"}
                       </AvatarFallback>
                     </Avatar>
                   </Button>
@@ -118,8 +120,12 @@ export function Navbar() {
                         </AvatarFallback>
                       </Avatar>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-semibold text-gray-800 truncate">{user.displayName || "User"}</p>
-                        <p className="text-xs text-gray-500 truncate">{user.email || "No email"}</p>
+                        <p className="text-sm font-semibold text-gray-800 truncate">
+                          {user.displayName || "User"}
+                        </p>
+                        <p className="text-xs text-gray-500 truncate">
+                          {user.email || "No email"}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -211,9 +217,19 @@ export function Navbar() {
                 stroke="currentColor"
               >
                 {isOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  />
                 )}
               </svg>
             </button>
@@ -237,15 +253,27 @@ export function Navbar() {
 
                   <div className="flex items-center gap-3 mt-6 p-3 bg-gray-50 rounded-lg">
                     <Avatar className="h-12 w-12 border-2 border-white shadow-sm">
-                      <AvatarImage src={user.photoURL || ""} alt={user.displayName || ""} />
+                      <AvatarImage
+                        src={user.photoURL || ""}
+                        alt={user.displayName || ""}
+                      />
                       <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-600 text-white text-sm font-semibold">
-                        {user.displayName?.charAt(0) || user.email?.charAt(0) || "U"}
+                        {user.displayName?.charAt(0) ||
+                          user.email?.charAt(0) ||
+                          "U"}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1 min-w-0">
-                      <p className="font-semibold text-gray-800 truncate text-sm">{user.displayName}</p>
-                      <p className="text-xs text-gray-500 truncate">{user.email}</p>
-                      <button onClick={handleLogout} className="text-red-500 text-sm mt-2 hover:underline font-medium">
+                      <p className="font-semibold text-gray-800 truncate text-sm">
+                        {user.displayName}
+                      </p>
+                      <p className="text-xs text-gray-500 truncate">
+                        {user.email}
+                      </p>
+                      <button
+                        onClick={handleLogout}
+                        className="text-red-500 text-sm mt-2 hover:underline font-medium"
+                      >
                         Sign out
                       </button>
                     </div>
@@ -273,5 +301,5 @@ export function Navbar() {
         </div>
       )}
     </nav>
-  )
+  );
 }

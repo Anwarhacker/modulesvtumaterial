@@ -26,7 +26,7 @@ export function Footer() {
               {[
                 { name: "Notes", href: "/notes" },
                 { name: "Syllabus", href: "/syllabus" },
-                { name: "Projects", href: "/projects" },
+                { name: "About", href: "/about" },
                 { name: "Project Ideas", href: "/project-ideas" },
               ].map((item) => (
                 <li key={item.name}>
