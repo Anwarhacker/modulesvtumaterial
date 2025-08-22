@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Download, Star, Book, Clock, Users } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { title } from "process";
 
 // ✅ Central subject data with at least 2 modules for each subject
 const subjectDataMap: Record<string, any> = {
@@ -26,17 +25,13 @@ const subjectDataMap: Record<string, any> = {
         topics: [
           {
             title: "Calculus:",
-            content:
-              " Introduction to polar coordinates and curvature relating to Computer Science and Engineering. Polar coordinates, Polar curves,angle between the radius vector and the tangent, angle between two curves. Pedal equations. Curvature and Radius of curvature —Cartesian, Parametric, Polar and Pedal forms. Problems.",
-            //use if needed  or leave empty
-
-            title2: "",
-            content2: "",
-
-            //use if needed  or leave empty
-            title3: "hello",
+            content: "",
+            title2:
+              "Introduction to polar coordinates and curvature relating to Computer Science and Engineering",
+            content2:
+              "Polar coordinates, Polar curves, angle between the radius vector and the tangent, angle between two curves. Pedal equations. Curvature and Radius of curvature - Cartesian, Parametric, Polar and Pedal forms. Problems",
+            title3: "",
             content3: "",
-
             pdfLink: "/pdfs/math101/module1.pdf",
             notesLink: "/pdfs/math101/module1-notes.pdf",
           },
@@ -47,10 +42,14 @@ const subjectDataMap: Record<string, any> = {
         title: "MODULE-2",
         topics: [
           {
-            title: "Integral Calculus",
-            content: "Definite and indefinite integrals, applications.",
-            boldHeadings: "",
-            content2: "",
+            title: "Series Expansion and Multivariable Calculus",
+            content: "",
+            title2:
+              "Introduction of series expansion and partial differentiation in Computer Science & Engineering applications",
+            content2:
+              "Taylor’s and Maclaurin’s series expansion for one variable (Statement only) – problems. Indeterminate forms - L’Hospital’s rule - Problems. Partial differentiation, total derivative - differentiation of composite functions. Jacobian and problems. Maxima and minima for a function of two variables. Problems",
+            title3: "",
+            content3: "",
             pdfLink: "/pdfs/math101/module2.pdf",
             notesLink: "/pdfs/math101/module2-notes.pdf",
           },
@@ -61,12 +60,17 @@ const subjectDataMap: Record<string, any> = {
         title: "MODULE-3",
         topics: [
           {
-            title: "Integral Calculus",
-            content: "Definite and indefinite integrals, applications.",
-            boldHeadings: "",
-            content2: "",
-            pdfLink: "/pdfs/math101/module2.pdf",
-            notesLink: "/pdfs/math101/module2-notes.pdf",
+            title: "Ordinary Differential Equations (ODEs) of First Order",
+            content:
+              "Linear and Bernoulli’s differential equations. Exact and reducible to exact differential equations - Integrating factors on 1𝑁 (𝜕𝑀/𝜕𝑦 − 𝜕𝑁/𝜕𝑥 ) and 1𝑀 (𝜕𝑁/𝜕𝑥 − 𝑀/𝜕𝑦 ). Orthogonal trajectories, L-R & C-R circuits. Problems.",
+            title2:
+              "Introduction to first-order ordinary differential equations pertaining to the applications for Computer Science & Engineering.",
+            content2:
+              "Applications of ODEs in circuits and computer science related problems.",
+            title3: "",
+            content3: "",
+            pdfLink: "/pdfs/math101/module3.pdf",
+            notesLink: "/pdfs/math101/module3-notes.pdf",
           },
         ],
       },
@@ -75,12 +79,16 @@ const subjectDataMap: Record<string, any> = {
         title: "MODULE-4",
         topics: [
           {
-            title: "Integral Calculus",
-            content: "Definite and indefinite integrals, applications.",
-            boldHeadings: "",
-            content2: "",
-            pdfLink: "/pdfs/math101/module2.pdf",
-            notesLink: "/pdfs/math101/module2-notes.pdf",
+            title: "Modular Arithmetic",
+            content: "",
+            title2:
+              "Introduction of modular arithmetic and its applications in Computer Science and Engineering.",
+            content2:
+              "Introduction to Congruences, Linear Congruences, The Remainder theorem, Solving Polynomials, Linear Diophantine Equation, System of Linear Congruences, Euler’s Theorem, Wilson Theorem and Fermat’s little theorem. Applications of Congruences - RSA algorithm.",
+            title3: "",
+            content3: "",
+            pdfLink: "/pdfs/math101/module4.pdf",
+            notesLink: "/pdfs/math101/module4-notes.pdf",
           },
         ],
       },
@@ -89,12 +97,16 @@ const subjectDataMap: Record<string, any> = {
         title: "MODULE-5",
         topics: [
           {
-            title: "Integral Calculus",
-            content: "Definite and indefinite integrals, applications.",
-            boldHeadings: "",
-            content2: "",
-            pdfLink: "/pdfs/math101/module2.pdf",
-            notesLink: "/pdfs/math101/module2-notes.pdf",
+            title: "Linear Algebra",
+            content: "",
+            title2:
+              "Introduction of linear algebra related to Computer Science & Engineering.",
+            content2:
+              "Elementary row transformation of a matrix, Rank of a matrix. Consistency and Solution of system of linear equations - Gauss-elimination method, Gauss-Jordan method and approximate solution by Gauss-Seidel method. Eigenvalues and Eigenvectors, Rayleigh’s power method to find the dominant Eigenvalue and Eigenvector.",
+            title3: "",
+            content3: "",
+            pdfLink: "/pdfs/math101/module5.pdf",
+            notesLink: "/pdfs/math101/module5-notes.pdf",
           },
         ],
       },
@@ -170,6 +182,7 @@ const subjectDataMap: Record<string, any> = {
       },
     ],
   },
+
   ce101: {
     code: "CE101",
     name: "Engineering Graphics",
@@ -205,10 +218,11 @@ const subjectDataMap: Record<string, any> = {
       },
     ],
   },
+
   // second sem
   math102: {
     code: "math102",
-    name: "Engineering Graphics",
+    name: "Calculus and Linear Algebra",
     credits: 2,
     enrolled: 600,
     rating: 4.2,
@@ -244,7 +258,7 @@ const subjectDataMap: Record<string, any> = {
 
   cs102: {
     code: "cs102",
-    name: "Engineering Graphics",
+    name: "Data Structures",
     credits: 2,
     enrolled: 600,
     rating: 4.2,
@@ -255,10 +269,10 @@ const subjectDataMap: Record<string, any> = {
         title: "MODULE-1",
         topics: [
           {
-            title: "Drawing Basics",
-            content: "Lines, curves, scales, lettering.",
-            pdfLink: "/pdfs/ce101/module1.pdf",
-            notesLink: "/pdfs/ce101/module1-notes.pdf",
+            title: "Introduction to Data Structures",
+            content: "Arrays, linked lists, stacks, queues.",
+            pdfLink: "/pdfs/cs102/module1.pdf",
+            notesLink: "/pdfs/cs102/module1-notes.pdf",
           },
         ],
       },
@@ -267,11 +281,10 @@ const subjectDataMap: Record<string, any> = {
         title: "MODULE-2",
         topics: [
           {
-            title: "Projection",
-            content:
-              "Orthographic and isometric projection, perspective views.",
-            pdfLink: "/pdfs/ce101/module2.pdf",
-            notesLink: "/pdfs/ce101/module2-notes.pdf",
+            title: "Trees and Graphs",
+            content: "Binary trees, traversal, graphs basics.",
+            pdfLink: "/pdfs/cs102/module2.pdf",
+            notesLink: "/pdfs/cs102/module2-notes.pdf",
           },
         ],
       },
