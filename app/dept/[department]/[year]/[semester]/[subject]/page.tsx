@@ -386,11 +386,11 @@ export default function SubjectPage() {
                   <CardContent className="p-6">
                     {module.topics.map((topic: any, idx: number) => (
                       <div key={idx} className="mb-6">
-                        <h3 className="font-bold">{topic.title}</h3>
+                        <h3 className="font-bold mb-2">{topic.title}</h3>
                         <p className="text-gray-700">{topic.content}</p>
-                        <h3 className="font-bold mt-3">{topic.title2}</h3>
+                        <h3 className="font-bold mt-3 mb-2">{topic.title2}</h3>
                         <p className="text-gray-700">{topic.content2}</p>
-                        <h3 className="font-bold mt-3">{topic.title3}</h3>
+                        <h3 className="font-bold mb-2">{topic.title3}</h3>
                         <p className="text-gray-700">{topic.content3}</p>
 
                         {/* ✅ PDF Buttons */}
